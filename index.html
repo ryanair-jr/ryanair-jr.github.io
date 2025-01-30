@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ryanair | Junior Department</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #003580;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+        }
+        header img {
+            height: 40px;
+        }
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content styles */
+        .main-container {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .main-container h1 {
+            color: #003580;
+            font-size: 24px;
+        }
+        .main-container p {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0;
+        }
+        .main-container button {
+            background-color: #ffcc00;
+            color: #003580;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .main-container button:hover {
+            background-color: #ffd633;
+        }
+
+        /* Details section */
+        .details-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .details-container h2 {
+            color: #003580;
+            font-size: 20px;
+        }
+        .details-container ul {
+            text-align: left;
+            font-size: 16px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Popup styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+        .popup h2 {
+            color: #003580;
+            margin-bottom: 10px;
+        }
+        .popup p {
+            font-size: 16px;
+            margin: 10px 0;
+            color: #333;
+        }
+        .popup button {
+            background-color: #ffcc00;
+            color: #003580;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .popup button:hover {
+            background-color: #ffd633;
+        }
+
+        /* Overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fake Ryanair Header -->
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Ryanair_logo.svg/2560px-Ryanair_logo.svg.png" alt="Ryanair Logo">
+        <nav>
+            <a href="#" onclick="showFakeMessage()">Flights</a>
+            <a href="#" onclick="showFakeMessage()">Hotels</a>
+            <a href="#" onclick="showFakeMessage()">Car Hire</a>
+            <a href="#" onclick="location.reload()">Junior Department</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <h1>Welcome to Ryanair Junior Department</h1>
+        <p>
+            Thank you for your interest in the Ryanair Junior Department at our Dublin HQ Training Kids Platform.
+        </p>
+        <p>
+            Unfortunately, we are not accepting any new members at the moment. Please check back later.
+        </p>
+        <button id="applyBtn">Apply Now</button>
+    </div>
+
+    <!-- Details Section -->
+    <div class="details-container">
+        <h2>About the Ryanair Junior Department</h2>
+        <p>The Ryanair Junior Department is an exclusive programme designed for young aviation enthusiasts aged 10-16. Participants travel from London Stansted to our Dublin HQ to experience a day filled with exciting activities, including:</p>
+        <ul>
+            <li>A behind-the-scenes tour of Ryanair's operations centre.</li>
+            <li>Flight simulator sessions where you can "pilot" a virtual Ryanair aircraft.</li>
+            <li>Team-building challenges and games organised by Ryanair staff.</li>
+            <li>Exclusive merchandise and a Junior Pilot Certificate upon completion.</li>
+        </ul>
+        <h2>Membership Fees</h2>
+        <ul>
+            <li><strong>Annual Membership:</strong> £1000 per year.</li>
+            <li><strong>Waiting Line Fee:</strong> £5 per person (non-refundable).</li>
+        </ul>
+        <p>All fees must be paid upfront, and no refunds are available. As a budget airline, we pride ourselves on offering transparent pricing for these unique opportunities.</p>
+        <p>For more information, please contact the Junior Department team via our official channels. (Note: This feature is temporarily unavailable).</p>
+    </div>
+
+    <!-- Popup -->
+    <div class="popup" id="popup">
+        <h2>Junior Department Application</h2>
+        <p>We appreciate your interest in the Ryanair Junior Department!</p>
+        <p>However, we are not currently accepting new members. Please check back at a later date.</p>
+        <p>Remember: The annual fee is £1000, and additional charges may apply for merchandise and activities.</p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- JavaScript -->
+    <script>
+        const applyBtn = document.getElementById('applyBtn');
+        const popup = document.getElementById('popup');
+        const overlay = document.getElementById('overlay');
+
+        applyBtn.addEventListener('click', () => {
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+        });
+
+        function closePopup() {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+
+        function showFakeMessage() {
+            alert("Please visit Ryanair.com for more information.");
+        }
+    </script>
+</body>
+</html>
